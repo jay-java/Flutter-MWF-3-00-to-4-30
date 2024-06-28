@@ -9,6 +9,10 @@ class Student {
   void data() {
     print('rollno : $rollNo name : $name college_name : $college_name');
   }
+
+  static void calling() {
+    print('static in student');
+  }
 }
 
 void main(List<String> args) {
@@ -16,4 +20,5 @@ void main(List<String> args) {
   s1.data();
   Student s2 = new Student(2, 'java');
   s2.data();
+  Student.calling();
 }
