@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'container_widget.dart';
 import 'first.dart';
-import 'my_column.dart';
+import 'images.dart';
+import 'my_column_row.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyColumn(),
+      home: const MyImage(),
     );
   }
 }
