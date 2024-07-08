@@ -12,7 +12,9 @@ class MyImage extends StatelessWidget {
       body: Container(
         height: 150,
         width: 150,
-        child: Image.asset('assets/all_images/chair.png'),
+        child: CircleAvatar(
+          backgroundImage: AssetImage('assets/all_images/tshirt.png'),),
+        // child: Image.asset('assets/all_images/shoes.png'),
       ),
     );
   }
