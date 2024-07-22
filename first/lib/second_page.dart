@@ -5,6 +5,7 @@ class MySecondPage extends StatelessWidget {
   String? contact;
   String? email;
   String? password;
+
   MySecondPage(
       {required this.name,
         required this.contact,
