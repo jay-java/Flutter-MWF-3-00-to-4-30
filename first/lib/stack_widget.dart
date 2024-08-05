@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 class MyStack extends StatelessWidget {
   const MyStack({super.key});
 
@@ -15,22 +13,24 @@ class MyStack extends StatelessWidget {
         children: [
           Positioned(
             child: Container(
-              height: 300,
-              width: 300,
-              color: Colors.blue,
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.yellow.shade700,
             ),
           ),
           Positioned(
-            top: 50,
-            left: 50,
+            top: 150,
             child: Container(
-              height: 200,
-              width: 200,
-              color: Colors.yellow,
+              height: 650,
+              width: 415,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(80),topRight: Radius.circular(80))
+              ),
             ),
           ),
           Positioned(
-            left: 100,
+            left: 160,
             top: 100,
             child: Container(
               height: 100,

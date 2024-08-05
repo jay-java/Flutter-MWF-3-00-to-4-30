@@ -1,27 +1,11 @@
-import 'package:first/radioListTile.dart';
-import 'package:first/radiobutton.dart';
-import 'package:first/splash_screen.dart';
-import 'package:first/stack_widget.dart';
 import 'package:flutter/material.dart';
-import 'checkBoc.dart';
-import 'checkListTile.dart';
-import 'container_widget.dart';
-import 'first.dart';
-import 'form.dart';
-import 'images.dart';
-import 'list_view.dart';
-import 'my_column_row.dart';
-import 'ink_well.dart';
-import 'card_widget.dart';
-import 'decoration_widget.dart';
-import 'date_time.dart';
+import 'package:sqlite_project/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -49,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyStack(),
+      home: HomeScreen(),
     );
   }
 }
@@ -65,7 +49,6 @@ class MyHomePage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
   final String title;
 
   @override
