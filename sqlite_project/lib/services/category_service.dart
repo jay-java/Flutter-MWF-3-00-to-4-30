@@ -14,4 +14,16 @@ class CategoryService{
     return await _repository?.insertData('CATEGORIES', category.categoryMap());
   }
 
+  // readCategory() async{
+  //   _repository?.readData('CATEGORIES');
+  // }
+
+  //read data
+  readCategories() async{
+    return await _repository?.readData('CATEGORIES');
+  }
+
+  readCategoryById(categoryId) async {
+    return await _repository?.readDataById('CATEGORIES',categoryId);
+  }
 }

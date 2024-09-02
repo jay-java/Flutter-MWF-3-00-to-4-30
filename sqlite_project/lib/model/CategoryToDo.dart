@@ -5,6 +5,9 @@ class CategoryToDo {
   String? name;
   String? description;
 
+  CategoryToDo(){
+  }
+
   void setId(int id){
     this.id=id;
   }
@@ -41,4 +44,5 @@ class CategoryToDo {
     mapping['description'] = description;
     return mapping;
   }
+
 }
