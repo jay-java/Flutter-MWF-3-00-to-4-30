@@ -10,6 +10,11 @@ class DatabaseConnection{
   }
 
   _onCreatingDatabase(Database database, int version) async{
+
     await database.execute("CREATE TABLE CATEGORIES(id INTEGER PRIMARY KEY,name TEXT,description TEXT)");
+
+    //todo table
+    await database.execute("CREATE TABLE TODO(id INTEGER PRIMARY KEY,title TEXT,description TEXT,category TEXT, todoDate TEXT, isFinished INTEGER)");
   }
+
 }

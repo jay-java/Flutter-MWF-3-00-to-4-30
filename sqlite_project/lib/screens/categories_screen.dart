@@ -30,12 +30,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     getAllCategories();
   }
 
+
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
   getAllCategories() async {
-    // print('function called');
     var categories = await _categoryService.readCategories();
-    // print('categories -->>  $categories');
-    // print(categories.runtimeType);
-    // print(categories[0]['name']);
     categories.forEach((cat){
       setState(() {
         var c = CategoryToDo();
@@ -49,6 +48,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   var category;
 
+  //this will fetch single category data
   _editCategory(BuildContext context,categoryId) async {
     category = await _categoryService.readCategoryById(categoryId);
     setState(() {
@@ -58,6 +58,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     _editFormDialogue(context);
   }
 
+  //to add new category
   _showFormDialogue(BuildContext context) {
     return showDialog(
         context: context,
@@ -71,6 +72,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     print(_category);
                     var res = _categoryService.saveCategory(_category);
                     print(res);
+                    getAllCategories();
                     Navigator.pop(context);
                   },
                   child: Text('Add',style: TextStyle(color: Colors.white),),
@@ -115,6 +117,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
   }
 
+  //to update category data
   _editFormDialogue(BuildContext context) {
     return showDialog(
         context: context,
@@ -123,12 +126,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             actions: [
               OutlinedButton(
                 onPressed: () async{
-                  _category.name = _categoryNameController.text;
-                  _category.description = _categoryDescriptionController.text;
-                  print(_category);
-                  var res = _categoryService.saveCategory(_category);
-                  print(res);
+                  print('on pressed update called');
+                  _category.id  = category[0]['id'];
+                  _category.name = _editCategoryNameController.text;
+                  _category.description = _editCategoryDescriptionController.text;
+                  var res = _categoryService.updateCategory(_category);
                   Navigator.pop(context);
+                  getAllCategories();
                 },
                 child: Text('Update',style: TextStyle(color: Colors.white),),
                 style: ButtonStyle(
@@ -172,9 +176,51 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
   }
 
+  //to delete category
+  _deleteFormDialogue(BuildContext context,categoryId) {
+    return showDialog(
+        context: context,
+        builder: (param) {
+          return AlertDialog(
+            actions: [
+              OutlinedButton(
+                onPressed: () async{
+                  var res = _categoryService.deleteCategory(categoryId);
+                  getAllCategories();
+                  Navigator.pop(context);
+                },
+                child: Text('Delete',style: TextStyle(color: Colors.white),),
+                style: ButtonStyle(
+                  // foregroundColor: MaterialStateProperty.all(Colors.green),
+                    backgroundColor: MaterialStateProperty.all(Colors.red)
+                ),
+              ),
+              OutlinedButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel',style: TextStyle(color: Colors.white),),
+                style: ButtonStyle(
+                  // foregroundColor: MaterialStateProperty.all(Colors.green),
+                    backgroundColor: MaterialStateProperty.all(Colors.green)
+                ),
+              ),
+            ],
+            title: Text('Are you sure ?'),
+
+          );
+        });
+  }
+
+  _showSuccessSnackbar(message){
+    var _snackBar = SnackBar(content: message);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       appBar: AppBar(
         leading: InkWell(
           child: Icon(Icons.arrow_back),
@@ -199,9 +245,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(_categoryList[index].id.toString()),
                   Text(_categoryList[index].name.toString()),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.delete,color: Colors.red,))
+                  IconButton(onPressed: (){
+                    _deleteFormDialogue(context,_categoryList[index].id);
+                  }, icon: Icon(Icons.delete,color: Colors.red,))
                 ],
               ),
               subtitle: Text(_categoryList[index].description.toString()),

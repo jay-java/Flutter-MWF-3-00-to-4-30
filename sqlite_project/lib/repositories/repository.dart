@@ -21,13 +21,25 @@ class Repository{
     return await connection?.insert(table, data);
   }
 
+  //list of data
   readData(table) async{
     var connection = await database;
     return await connection?.query(table);
   }
 
+  //single data
   readDataById(table, categoryId) async {
     var connection = await database;
     return await connection?.query(table,where: 'id=?',whereArgs: [categoryId]);
+  }
+
+  updateData(table, data) async{
+    var connection = await database;
+    return await connection?.update(table, data, where: 'id=?',whereArgs: [data['id']]);
+  }
+
+  deleteData(table,categoryId) async{
+    var connection = await database;
+    return await connection?.rawDelete('DELETE FROM $table WHERE id = $categoryId');
   }
 }
